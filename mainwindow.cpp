@@ -40,15 +40,27 @@ void MainWindow::InitializeScene() {
     // 1. Add a sphere to the scene
     std::shared_ptr<Sphere> redSphere = std::make_shared<Sphere>();
     redSphere->modelMatrix = new glm::mat4(1.0f);
-    (*redSphere->modelMatrix) = glm::translate(*redSphere->modelMatrix, glm::vec3(0,0,-50));
-    (*redSphere->modelMatrix) = glm::scale(*redSphere->modelMatrix, glm::vec3(2.0f, 2.0f, 2.0f));
+    redSphere->invModelMatrix = new glm::mat4(1.0f);
+    glm::mat4 rotate = glm::rotate(glm::mat4(1.0f), 45.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+    glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -50.0f));
+    glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(4.0f, 8.0f, 4.0f));
+    (*redSphere->modelMatrix) = translate * rotate * scale;
+    (*redSphere->invModelMatrix) = glm::inverse((*redSphere->modelMatrix));
     mainScene->InsertShape(redSphere);
 }
 
+//#define DEBUG
 void MainWindow::RenderQuads(int pixelStartPosX, int pixelStartPosY, int pixelEndPosX, int pixelEndPosY) {
+#ifndef DEBUG
     for(int indexY = pixelStartPosY; indexY <= pixelEndPosY; indexY++) {
         for(int indexX = pixelStartPosX; indexX <= pixelEndPosX; indexX++) {
-            // Calculate the ray origin and direction for the given pixel coordinates
+//          Calculate the ray origin and direction for the given pixel coordinates
+#else
+    {
+        {
+            int indexX = 399;
+            int indexY = 399;
+#endif
             float ndcPixelX = (2.0f * indexX / windowWidth) - 1.0f;
             float ndcPixelY = 1.0f - (2.0f * indexY / windowHeight);
             glm::vec4 pointOnfarClip = glm::inverse(mainScene->camera->viewMatrix) * glm::inverse(mainScene->camera->projectionMatrix) * (glm::vec4(ndcPixelX, ndcPixelY, 1.0f, 1.0f) * mainScene->camera->farClip);
@@ -56,6 +68,7 @@ void MainWindow::RenderQuads(int pixelStartPosX, int pixelStartPosY, int pixelEn
             std::shared_ptr<Ray> ray = std::make_shared<Ray>(mainScene->camera->cameraPos, rayDirection);
             glm::vec3 col = mainScene->Color(ray);
             image->setPixel(indexX, indexY, qRgb(col[0] , col[1] , col[2]));
+
         }
     }
     pixMap = new QPixmap(QPixmap::fromImage(*image));

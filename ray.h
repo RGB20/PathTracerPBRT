@@ -1,6 +1,12 @@
 #ifndef RAY_H
 #define RAY_H
+#include <memory>
 #include "glm/vec3.hpp"
+
+struct Intersect {
+    float parameterDistance;
+    glm::vec3 worldSpaceIntersectionNormal;
+};
 
 class Ray
 {
@@ -9,14 +15,14 @@ public:
 
     Ray(glm::vec3 _rayOrigin, glm::vec3 _rayDirection) : rayOrigin(_rayOrigin), rayDirection(_rayDirection){}
 
-    glm::vec3 PointAtParameter() const {
-        return rayOrigin + distanceFromRayOrigin * rayDirection;
+    static glm::vec3 PointAtParameter(glm::vec3 _rayOrigin, glm::vec3 _rayDirection, float distanceOfPointOfIntersection) {
+        return _rayOrigin + distanceOfPointOfIntersection * _rayDirection;
     }
 
+    // Ray parameters
     glm::vec3 rayOrigin;
     glm::vec3 rayDirection;
-    float distanceFromRayOrigin;
-    glm::vec3 intersectionNormal;
+    std::shared_ptr<Intersect> intersectionInfo;
 };
 
 #endif // RAY_H

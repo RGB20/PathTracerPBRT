@@ -6,11 +6,18 @@
 class Sphere : public Shape
 {
 public:
-    Sphere() {}
+    Sphere() {
+        sphereCenter = glm::vec3(0.0f, 0.0f, 0.0f);
+        sphereRadius = 1.0f;
+    }
 
     bool FindIntersection(std::shared_ptr<Ray> ray);
 
     ~Sphere() {}
+
+    // Unity sphere data variables
+    glm::vec3 sphereCenter;
+    float sphereRadius;
 };
 
 #endif // SPHERE_H

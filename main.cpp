@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
     mainWindow.InitializeScene();
     mainWindow .show();
 
-    int gridDimX = 16;
-    int gridDimY = 16;
+    int gridDimX = 4;
+    int gridDimY = 4;
     for(int gridIndexX = 0; gridIndexX < gridDimX; gridIndexX++) {
         int startIndexX = gridIndexX * WIDTH / gridDimX;
         int endIndexX = (gridIndexX + 1) * WIDTH / gridDimX - 1;
