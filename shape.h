@@ -18,8 +18,8 @@ public:
     virtual ~Shape() {}
 
     // This matrix takes the object from local object space to world space
-    glm::mat4* modelMatrix = nullptr;
-    glm::mat4* invModelMatrix = nullptr;
+    glm::mat4* modelMatrix;
+    glm::mat4* invModelMatrix;
 };
 
 #endif // SHAPE_H

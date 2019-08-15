@@ -18,13 +18,15 @@ SOURCES += main.cpp\
     shape.cpp \
     ray.cpp \
     camera.cpp \
-    sphere.cpp
+    sphere.cpp \
+    plane.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
     shape.h \
     ray.h \
     camera.h \
-    sphere.h
+    sphere.h \
+    plane.h
 
 FORMS    += mainwindow.ui
