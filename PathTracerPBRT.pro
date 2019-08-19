@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = PathTracerPBRT
 TEMPLATE = app
-CONFIG += c++11
+CONFIG += c++11 -pthread
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     ray.cpp \
     camera.cpp \
     sphere.cpp \
-    plane.cpp
+    plane.cpp \
+    polygon.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -27,6 +28,7 @@ HEADERS  += mainwindow.h \
     ray.h \
     camera.h \
     sphere.h \
-    plane.h
+    plane.h \
+    polygon.h
 
 FORMS    += mainwindow.ui

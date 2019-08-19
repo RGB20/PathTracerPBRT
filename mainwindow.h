@@ -36,6 +36,8 @@ public:
 
     void InitializeScene();
 
+    void UpadateScene();
+
 private:
     Ui::MainWindow *ui;
 

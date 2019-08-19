@@ -38,26 +38,26 @@ void MainWindow::InitializeScene() {
 
     // Process and add the shapes to the scene
     // 1. Add a sphere to the scene
-//    std::shared_ptr<Sphere> simpleSphere = std::make_shared<Sphere>();
-//    simpleSphere->modelMatrix = new glm::mat4(1.0f);
-//    simpleSphere->invModelMatrix = new glm::mat4(1.0f);
-//    glm::mat4 rotate = glm::rotate(glm::mat4(1.0f), 45.0f, glm::vec3(1.0f, 1.0f, 1.0f));
-//    glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -50.0f));
-//    glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(4.0f, 8.0f, 4.0f));
-//    (*simpleSphere->modelMatrix) = translate * rotate * scale;
-//    (*simpleSphere->invModelMatrix) = glm::inverse((*simpleSphere->modelMatrix));
-//    mainScene->InsertShape(simpleSphere);
+    std::shared_ptr<Sphere> simpleSphere = std::make_shared<Sphere>();
+    simpleSphere->modelMatrix = new glm::mat4(1.0f);
+    simpleSphere->invModelMatrix = new glm::mat4(1.0f);
+    glm::mat4 rotate = glm::rotate(glm::mat4(1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+    glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -50.0f));
+    glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, 2.0f));
+    (*simpleSphere->modelMatrix) = translate * rotate * scale;
+    (*simpleSphere->invModelMatrix) = glm::inverse((*simpleSphere->modelMatrix));
+    mainScene->InsertShape(simpleSphere);
 
     // 2. Add a plane to the scene
-    std::shared_ptr<Plane> simplePlane = std::make_shared<Plane>();
-    simplePlane->modelMatrix = new glm::mat4(1.0f);
-    simplePlane->invModelMatrix = new glm::mat4(1.0f);
-    glm::mat4 rotate = glm::rotate(glm::mat4(1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f));
-    glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -10.0f));
-    glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-    (*simplePlane->modelMatrix) = translate * rotate * scale;
-    (*simplePlane->invModelMatrix) = glm::inverse((*simplePlane->modelMatrix));
-    mainScene->InsertShape(simplePlane);
+//    std::shared_ptr<Plane> simplePlane = std::make_shared<Plane>();
+//    simplePlane->modelMatrix = new glm::mat4(1.0f);
+//    simplePlane->invModelMatrix = new glm::mat4(1.0f);
+//    glm::mat4 rotate = glm::rotate(glm::mat4(1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+//    glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -10.0f));
+//    glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+//    (*simplePlane->modelMatrix) = translate * rotate * scale;
+//    (*simplePlane->invModelMatrix) = glm::inverse((*simplePlane->modelMatrix));
+//    mainScene->InsertShape(simplePlane);
 }
 
 //#define DEBUG
@@ -79,9 +79,11 @@ void MainWindow::RenderQuads(int pixelStartPosX, int pixelStartPosY, int pixelEn
             std::shared_ptr<Ray> ray = std::make_shared<Ray>(mainScene->camera->cameraPos, rayDirection);
             glm::vec3 col = mainScene->Color(ray);
             image->setPixel(indexX, indexY, qRgb(col[0] , col[1] , col[2]));
-
         }
     }
+}
+
+void MainWindow::UpadateScene() {
     pixMap = new QPixmap(QPixmap::fromImage(*image));
     pixelMapItem->setPixmap(*pixMap);
 }
