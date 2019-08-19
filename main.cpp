@@ -26,6 +26,7 @@ int main(int argc, char *argv[])
             threads.push_back(std::thread(&MainWindow::RenderQuads, &mainWindow, startIndexX, startIndexY, endIndexX, endIndexY));
         }
     }
+    // Wait for the threads to complete before exiting
     for(int threadIndex = 0; threadIndex < threads.size(); threadIndex++) {
         threads[threadIndex].join();
     }
