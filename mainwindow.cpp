@@ -38,15 +38,15 @@ void MainWindow::InitializeScene() {
 
     // Process and add the shapes to the scene
     // 1. Add a sphere to the scene
-//    std::shared_ptr<Sphere> simpleSphere = std::make_shared<Sphere>();
-//    simpleSphere->modelMatrix = new glm::mat4(1.0f);
-//    simpleSphere->invModelMatrix = new glm::mat4(1.0f);
-//    glm::mat4 rotate = glm::rotate(glm::mat4(1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f));
-//    glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -50.0f));
-//    glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, 2.0f));
-//    (*simpleSphere->modelMatrix) = translate * rotate * scale;
-//    (*simpleSphere->invModelMatrix) = glm::inverse((*simpleSphere->modelMatrix));
-//    mainScene->InsertShape(simpleSphere);
+    std::shared_ptr<Sphere> simpleSphere = std::make_shared<Sphere>();
+    simpleSphere->modelMatrix = new glm::mat4(1.0f);
+    simpleSphere->invModelMatrix = new glm::mat4(1.0f);
+    glm::mat4 rotate = glm::rotate(glm::mat4(1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+    glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -50.0f));
+    glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(4.0f, 4.0f, 4.0f));
+    (*simpleSphere->modelMatrix) = translate * rotate * scale;
+    (*simpleSphere->invModelMatrix) = glm::inverse((*simpleSphere->modelMatrix));
+    mainScene->InsertShape(simpleSphere);
 
     // 2. Add a plane to the scene
 //    std::shared_ptr<Plane> simplePlane = std::make_shared<Plane>();
@@ -60,25 +60,25 @@ void MainWindow::InitializeScene() {
 //    mainScene->InsertShape(simplePlane);
 
     // 3. Add a polygonal mesh to the scene
-        std::vector<glm::vec3> meshPoints;
-        meshPoints.push_back(glm::vec3(-0.5f, -0.5f, 0.0f));
-        meshPoints.push_back(glm::vec3(0.0f, 0.5f, 0.0f));
-        meshPoints.push_back(glm::vec3(0.5f, -0.5f, 0.0f));
-        std::vector<int> triangulatedMeshIndixes;
-        triangulatedMeshIndixes.push_back(0);
-        triangulatedMeshIndixes.push_back(1);
-        triangulatedMeshIndixes.push_back(2);
-        bool backfaceCulling = true;
-        bool clockwiseTriangulation = false;
-        std::shared_ptr<Polygon> simplePolygonalMesh = std::make_shared<Polygon>(meshPoints, triangulatedMeshIndixes, backfaceCulling, clockwiseTriangulation);
-        simplePolygonalMesh->modelMatrix = new glm::mat4(1.0f);
-        simplePolygonalMesh->invModelMatrix = new glm::mat4(1.0f);
-        glm::mat4 rotate = glm::rotate(glm::mat4(1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f));
-        glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -10.0f));
-        glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, 2.0f));
-        (*simplePolygonalMesh->modelMatrix) = translate * rotate * scale;
-        (*simplePolygonalMesh->invModelMatrix) = glm::inverse((*simplePolygonalMesh->modelMatrix));
-        mainScene->InsertShape(simplePolygonalMesh);
+//        std::vector<glm::vec3> meshPoints;
+//        meshPoints.push_back(glm::vec3(-0.5f, -0.5f, 0.0f));
+//        meshPoints.push_back(glm::vec3(0.0f, 0.5f, 0.0f));
+//        meshPoints.push_back(glm::vec3(0.5f, -0.5f, 0.0f));
+//        std::vector<int> triangulatedMeshIndixes;
+//        triangulatedMeshIndixes.push_back(0);
+//        triangulatedMeshIndixes.push_back(1);
+//        triangulatedMeshIndixes.push_back(2);
+//        bool backfaceCulling = true;
+//        bool clockwiseTriangulation = false;
+//        std::shared_ptr<Polygon> simplePolygonalMesh = std::make_shared<Polygon>(meshPoints, triangulatedMeshIndixes, backfaceCulling, clockwiseTriangulation);
+//        simplePolygonalMesh->modelMatrix = new glm::mat4(1.0f);
+//        simplePolygonalMesh->invModelMatrix = new glm::mat4(1.0f);
+//        glm::mat4 rotate = glm::rotate(glm::mat4(1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+//        glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -10.0f));
+//        glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, 2.0f));
+//        (*simplePolygonalMesh->modelMatrix) = translate * rotate * scale;
+//        (*simplePolygonalMesh->invModelMatrix) = glm::inverse((*simplePolygonalMesh->modelMatrix));
+//        mainScene->InsertShape(simplePolygonalMesh);
 }
 
 //#define DEBUG

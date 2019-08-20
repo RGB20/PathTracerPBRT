@@ -8,6 +8,14 @@
 #include "glm/vec3.hpp"
 #include "camera.h"
 
+struct Interaction {
+    float parameterDistance;
+    glm::vec3 pointOfIntersection;
+    glm::vec3 worldSpaceNormal;
+
+    // We will add materials later to this struct
+};
+
 class Scene
 {
 public:
@@ -16,6 +24,7 @@ public:
     void InsertShape(std::shared_ptr<Shape> shape);
 
     glm::vec3 Color(std::shared_ptr<Ray> ray);
+    bool FindIntersectionWithScene(std::shared_ptr<Ray> ray, std::shared_ptr<Interaction> interaction);
 
     std::shared_ptr<Camera> camera;
     std::vector<std::shared_ptr<Shape>> shapes;
