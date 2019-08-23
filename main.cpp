@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
         }
     }
     // Wait for the threads to complete before exiting
-    for(int threadIndex = 0; threadIndex < threads.size(); threadIndex++) {
+    for(size_t threadIndex = 0; threadIndex < threads.size(); threadIndex++) {
         threads[threadIndex].join();
     }
     mainWindow.UpadateScene();
