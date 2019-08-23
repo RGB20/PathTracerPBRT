@@ -7,6 +7,7 @@
 #include <cmath>
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "material.h"
 
 class Shape
 {
@@ -19,8 +20,9 @@ public:
     virtual ~Shape() {}
 
     // This matrix takes the object from local object space to world space
-    glm::mat4* modelMatrix;
-    glm::mat4* invModelMatrix;
+    glm::mat4 modelMatrix;
+    glm::mat4 invModelMatrix;
+    std::shared_ptr<Material> material;
 };
 
 #endif // SHAPE_H

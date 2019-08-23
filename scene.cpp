@@ -23,7 +23,8 @@ bool Scene::FindIntersectionWithScene(std::shared_ptr<Ray> ray, std::shared_ptr<
                 // Fill the interaction struct
                 interaction->parameterDistance = minDistance;
                 interaction->worldSpaceNormal = ray->intersectionInfo->worldSpaceIntersectionNormal;
-                interaction->pointOfIntersection = Ray::PointAtParameter(ray->rayOrigin, ray->rayDirection, minDistance);
+                interaction->worldSpacePointOfIntersection = Ray::PointAtParameter(ray->rayOrigin, ray->rayDirection, minDistance);
+                interaction->material = ray->intersectionInfo->material;
             }
         }
     }
@@ -35,7 +36,7 @@ glm::vec3 Scene::Color(std::shared_ptr<Ray> ray) {
     std::shared_ptr<Interaction> interaction = std::make_shared<Interaction>();
 
     if (FindIntersectionWithScene(ray, interaction)) {
-        finalColor = glm::abs(interaction->worldSpaceNormal) * 255.0f;
+        finalColor = interaction->material->albedo * glm::max(0.0f, glm::dot(interaction->worldSpaceNormal, glm::vec3(0.0f, 1.0f, 0.0f)));
     }
 
     return finalColor;

@@ -5,8 +5,8 @@ bool Plane::FindIntersection(std::shared_ptr<Ray> ray) {
     float parameterDistance;
 
     // Converting ray to object space
-    glm::vec3 objectSpaceRayOrigin = (*invModelMatrix) * glm::vec4(ray->rayOrigin, 1.0f);
-    glm::vec3 objectSpaceRayDirection = glm::vec3((*invModelMatrix) * glm::vec4(ray->rayDirection, 0.0f));
+    glm::vec3 objectSpaceRayOrigin = invModelMatrix * glm::vec4(ray->rayOrigin, 1.0f);
+    glm::vec3 objectSpaceRayDirection = glm::vec3(invModelMatrix * glm::vec4(ray->rayDirection, 0.0f));
 
     float denominator = glm::dot(normal, objectSpaceRayDirection);
     if (std::fabs(denominator) > 0.0001f) {
@@ -23,7 +23,10 @@ bool Plane::FindIntersection(std::shared_ptr<Ray> ray) {
                 ray->intersectionInfo->parameterDistance = parameterDistance;
 
                 // We will calculate the world space normal
-                ray->intersectionInfo->worldSpaceIntersectionNormal = glm::normalize(glm::vec3(glm::transpose(*invModelMatrix) * glm::vec4(normal, 0.0f)));
+                ray->intersectionInfo->worldSpaceIntersectionNormal = glm::normalize(glm::vec3(glm::transpose(invModelMatrix) * glm::vec4(normal, 0.0f)));
+
+                // Set the material
+                ray->intersectionInfo->material = material;
                 intersectionFound = true;
             }
 

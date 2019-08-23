@@ -15,6 +15,7 @@
 #include "sphere.h"
 #include "plane.h"
 #include "polygon.h"
+#include "diffuse.h"
 
 namespace Ui {
 class MainWindow;
