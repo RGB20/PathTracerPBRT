@@ -5,8 +5,8 @@ bool Polygon::FindIntersection(std::shared_ptr<Ray> ray) {
     bool intersectionFound = false;
 
     // Object space ray origin and direction
-    glm::vec3 objectSpaceRayOrigin = (*invModelMatrix) * glm::vec4(ray->rayOrigin, 1.0f);
-    glm::vec3 objectSpaceRayDirection = glm::vec3((*invModelMatrix) * glm::vec4(ray->rayDirection, 0.0f));
+    glm::vec3 objectSpaceRayOrigin = invModelMatrix * glm::vec4(ray->rayOrigin, 1.0f);
+    glm::vec3 objectSpaceRayDirection = glm::vec3(invModelMatrix * glm::vec4(ray->rayDirection, 0.0f));
 
     // Iterate through each traiangle inside the mesh and find the closest intersection with the ray
     for (unsigned int triangleIndex = 0; triangleIndex < triangulatedMeshIndixes.size(); triangleIndex+=3) {
@@ -109,7 +109,10 @@ bool Polygon::FindIntersection(std::shared_ptr<Ray> ray) {
             }
 
             // calculate and store the normal in world space
-            ray->intersectionInfo->worldSpaceIntersectionNormal = glm::normalize(glm::vec3(glm::transpose(*invModelMatrix) * glm::vec4(normal, 0.0f)));;
+            ray->intersectionInfo->worldSpaceIntersectionNormal = glm::normalize(glm::vec3(glm::transpose(invModelMatrix) * glm::vec4(normal, 0.0f)));;
+
+            // Set the material
+            ray->intersectionInfo->material = material;
         }
     }
 

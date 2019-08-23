@@ -4,8 +4,8 @@ bool Sphere::FindIntersection(std::shared_ptr<Ray> ray) {
     bool intersectionFound = false;
 
     // Converting the ray from world space to object space
-    glm::vec3 objectSpaceRayOrigin = (*invModelMatrix) * glm::vec4(ray->rayOrigin, 1.0f);
-    glm::vec3 objectSpaceRayDirection = glm::vec3((*invModelMatrix) * glm::vec4(ray->rayDirection, 0.0f));
+    glm::vec3 objectSpaceRayOrigin = invModelMatrix * glm::vec4(ray->rayOrigin, 1.0f);
+    glm::vec3 objectSpaceRayDirection = glm::vec3(invModelMatrix * glm::vec4(ray->rayDirection, 0.0f));
 
     glm::vec3 oc = objectSpaceRayOrigin - sphereCenter;
     float A = glm::dot(objectSpaceRayDirection, objectSpaceRayDirection);
@@ -36,8 +36,11 @@ bool Sphere::FindIntersection(std::shared_ptr<Ray> ray) {
         glm::vec3 objSpacePOI = Ray::PointAtParameter(objectSpaceRayOrigin, objectSpaceRayDirection, ray->intersectionInfo->parameterDistance);
         glm::vec3 objSpaceNormal = glm::normalize(objSpacePOI - sphereCenter);
         // World Space Normal
-        glm::vec3 worldSpaceNormal = glm::normalize(glm::vec3(glm::transpose(*invModelMatrix) * glm::vec4(objSpaceNormal, 0.0f)));
+        glm::vec3 worldSpaceNormal = glm::normalize(glm::vec3(glm::transpose(invModelMatrix) * glm::vec4(objSpaceNormal, 0.0f)));
         ray->intersectionInfo->worldSpaceIntersectionNormal = worldSpaceNormal;
+
+        // Set the material
+        ray->intersectionInfo->material = material;
     }
     return intersectionFound;
 }

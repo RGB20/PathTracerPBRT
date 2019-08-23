@@ -10,10 +10,11 @@
 
 struct Interaction {
     float parameterDistance;
-    glm::vec3 pointOfIntersection;
+    glm::vec3 worldSpacePointOfIntersection;
     glm::vec3 worldSpaceNormal;
 
     // We will add materials later to this struct
+    std::shared_ptr<Material> material;
 };
 
 class Scene

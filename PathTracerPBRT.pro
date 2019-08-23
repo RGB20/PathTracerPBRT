@@ -20,7 +20,9 @@ SOURCES += main.cpp\
     camera.cpp \
     sphere.cpp \
     plane.cpp \
-    polygon.cpp
+    polygon.cpp \
+    material.cpp \
+    diffuse.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -29,6 +31,8 @@ HEADERS  += mainwindow.h \
     camera.h \
     sphere.h \
     plane.h \
-    polygon.h
+    polygon.h \
+    material.h \
+    diffuse.h
 
 FORMS    += mainwindow.ui

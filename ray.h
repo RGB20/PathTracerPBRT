@@ -2,10 +2,12 @@
 #define RAY_H
 #include <memory>
 #include "glm/vec3.hpp"
+#include "material.h"
 
 struct Intersect {
     float parameterDistance;
     glm::vec3 worldSpaceIntersectionNormal;
+    std::shared_ptr<Material> material;
 };
 
 class Ray
